@@ -1,41 +1,41 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-import Login from '../views/Login.vue'
-import Parameters from '../views/Parameters.vue'
-import Profile from '../views/Profile.vue'
-import Register from '../views/Register.vue'
-import ToDolist from '../views/ToDoList.vue'
+import HomeView from '@/views/HomeView.vue'
+import LoginView from '@/views/LoginView.vue'
+import ParametersView from '@/views/ParametersView.vue'
+import ProfileView from '@/views/ProfileView.vue'
+import RegisterView from '@/views/RegisterView.vue'
+import ToDoListView from '@/views/ToDoListView.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home
+    component: HomeView
   },
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: LoginView
   },
   {
     path: '/parameters',
     name: 'parameters',
-    component: Parameters
+    component: ParametersView
   },
   {
     path: '/profile',
     name: 'profile',
-    component: Profile
+    component: ProfileView
   },
   {
     path: '/register',
     name: 'register',
-    component: Register
+    component: RegisterView
   },
   {
     path: '/todolist',
     name: 'todolist',
-    component: ToDolist
+    component: ToDoListView
   }
 ]
 

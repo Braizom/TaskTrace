@@ -1,5 +1,5 @@
 <template>
   <div>
-    HOME
+    REGISTER
   </div>
 </template>
