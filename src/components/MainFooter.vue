@@ -14,16 +14,16 @@
       <div class="hidden w-full md:block md:w-auto" id="footer-nav">
         <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 sm:mt-0">
           <li>
-            <a href="#" class="hover:underline me-4 md:me-6">About</a>
+            <p class="me-4 md:me-6">About</p>
           </li>
           <li>
-            <a href="#" class="hover:underline me-4 md:me-6">Privacy Policy</a>
+            <p class="me-4 md:me-6">Privacy Policy</p>
           </li>
           <li>
-            <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
+            <p class="me-4 md:me-6">Licensing</p>
           </li>
           <li>
-            <a href="#" class="hover:underline">Contact</a>
+            <p>Contact</p>
           </li>
         </ul>
       </div>
