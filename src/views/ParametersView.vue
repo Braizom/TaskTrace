@@ -1,5 +1,5 @@
 <template>
   <div>
-    HOME
+    PARAMETERS
   </div>
 </template>

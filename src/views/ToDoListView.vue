@@ -1,5 +1,5 @@
 <template>
   <div>
-    HOME
+    TO-DO-LIST
   </div>
 </template>
