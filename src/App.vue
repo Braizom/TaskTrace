@@ -1,6 +1,6 @@
 <template>
-  <MainHeader/>
-  <router-view/>
+  <MainHeader :connected="connected" @update-connected="updateConnected"/>
+  <router-view :connected="connected" @update-connected="updateConnected"/>
   <MainFooter/>
 </template>
 
@@ -12,6 +12,17 @@ export default {
   components: {
     MainHeader,
     MainFooter
+  },
+  data () {
+    return {
+      connected: false
+    }
+  },
+  methods: {
+    updateConnected (status) {
+      console.log('update of "connected" :', status)
+      this.connected = status
+    }
   }
 }
 </script>
