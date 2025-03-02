@@ -3,9 +3,9 @@
     <h1 class="text-3xl font-semibold">Your Themes</h1>
     <div class="grid grid-cols-2 md:grid-cols-3 gap-5 p-10">
       <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm">
-        <a href="#">
+        <router-link to="/todolist">
           <img class="rounded-t-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" alt="" />
-        </a>
+        </router-link>
         <div class="p-5">
           <a href="#">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Books</h5>
