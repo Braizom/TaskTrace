@@ -14,20 +14,34 @@
       </button>
       <div class="hidden w-full md:block md:w-auto" id="navbar-default">
         <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 items-center">
-          <li>
-            <router-link to="/" class="bg-ttHeaderBtn py-1 px-1 text-ttHeaderText rounded-md ">Home</router-link>
+          <li v-if="connected">
+            <router-link to="/home" class="bg-ttHeaderBtn py-1 px-1 text-ttHeaderText rounded-md  hover:bg-black hover:text-white ">Home</router-link>
           </li>
-          <li>
-            <router-link to="/profile" class="bg-ttHeaderBtn block py-1 px-1 text-ttHeaderText rounded-md md:border-0">Profile</router-link>
+          <li v-if="connected">
+            <router-link to="/profile" class="bg-ttHeaderBtn block py-1 px-1 text-ttHeaderText rounded-md md:border-0  hover:bg-black hover:text-white ">Profile</router-link>
           </li>
-          <li>
-            <router-link to="/parameters" class="bg-ttHeaderBtn block py-1 px-1 text-ttHeaderText rounded-md md:border-0">Parameters</router-link>
+          <li v-if="connected">
+            <router-link to="/parameters" class="bg-ttHeaderBtn block py-1 px-1 text-ttHeaderText rounded-md md:border-0 hover:bg-black hover:text-white">Parameters</router-link>
           </li>
-          <li>
-            <router-link to="/login" class="bg-ttHeaderBtn block py-1 px-1 text-ttHeaderText rounded-md md:border-0">Login</router-link>
+          <li v-if="connected">
+            <button @click="logout" class="bg-black text-white px-3 py-1 rounded-md hover:bg-red-200 hover:text-black">Log Out</button>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 </template>
+
+<script>
+export default {
+  props: {
+    connected: Boolean
+  },
+  methods: {
+    logout () {
+      this.$emit('update-connected', false)
+      this.$router.push('/')
+    }
+  }
+}
+</script>
