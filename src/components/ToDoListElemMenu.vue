@@ -12,7 +12,7 @@
       </button>
     </li>
   </ul>
-  <CreateElement v-if="elemCreation"/>
+  <CreateElement v-if="elemCreation" :toggleElemCreation="toggleElemCreation"/>
 </template>
 
 <script>
