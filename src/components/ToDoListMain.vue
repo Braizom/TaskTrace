@@ -12,8 +12,6 @@
             Create a ToDo List
           </button>
         </li>
-        <li>
-        </li>
       </ul>
     </div>
   </div>
