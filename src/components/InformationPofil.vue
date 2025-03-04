@@ -1,4 +1,11 @@
 <template>
+    <div class="max-w-sm mx-auto my-10">
+        <h1 class="flex items-center text-5xl font-extrabold">ABDELKRIM
+            <span class="font-semibold me-2 px-2.5 py-0.5 rounded-sm ms-2">
+                <img class="w-20 h-20 rounded-full" src="@/assets/kermit.jpeg" alt="Rounded avatar">
+            </span>
+        </h1>
+    </div>
     <form class="max-w-sm mx-auto border border-gray-300 rounded-lg p-6 shadow-md my-10">
         <div class="mb-5">
             <label for="firstname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Firstname</label>
