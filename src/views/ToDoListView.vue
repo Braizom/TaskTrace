@@ -31,17 +31,12 @@
 <script>
 import ToDoListMain from '@/components/ToDoListMain.vue'
 import ToDoListElem from '@/components/ToDoListElem.vue'
-import lists from '@/lists.json'
 
 export default {
   components: {
     ToDoListMain,
     ToDoListElem
   },
-  data () {
-    return {
-      lists: lists
-    }
-  }
+  props: ['lists']
 }
 </script>
