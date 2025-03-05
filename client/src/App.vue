@@ -1,6 +1,6 @@
 <template>
   <MainHeader :connected="connected" @update-connected="updateConnected"/>
-  <router-view :connected="connected" @update-connected="updateConnected" :lists="contents" />
+  <router-view :connected="connected" @update-connected="updateConnected" :themes="contents" />
   <MainFooter/>
 </template>
 

@@ -1,8 +1,8 @@
 <template>
   <div class="mx-44">
-    <ToDoListMain/>
+    <ToDoListMain :theme="theme"/>
     <ul class="mt-5 mb-5 divide-y rounded-xl">
-      <li v-for="(list, i) in lists" :key="i">
+      <li v-for="(list, i) in theme.lists" :key="i">
         <details class="group">
           <summary class="w-full flex justify-between gap-3 px-4 py-3 font-medium marker:content-none hover:cursor-pointer">
             <span class="flex text-xl items-center">
@@ -37,6 +37,15 @@ export default {
     ToDoListMain,
     ToDoListElem
   },
-  props: ['lists']
+  props: ['themes'],
+  computed: {
+    theme () {
+      const theme = this.themes.find((p) => {
+        return p.id === Number(this.$route.params.id)
+      })
+      console.log(theme.lists.length)
+      return theme
+    }
+  }
 }
 </script>

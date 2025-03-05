@@ -1,40 +1,93 @@
 [
   {
-    "id": 1,
-    "name": "English Books",
-    "elems":
+    "id": 0,
+    "name": "Books",
+    "lists":
     [
       {
-        "id": 1,
-        "status": 0,
-        "icon": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
-        "name": "Oliver Twist, Charles Dickens"
+        "id": 0,
+        "name": "English Books",
+        "elems":
+        [
+          {
+            "id": 0,
+            "status": 0,
+            "icon": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
+            "name": "Oliver Twist, Charles Dickens"
+          },
+          {
+            "id": 1,
+            "status": 0,
+            "icon": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
+            "name": "Dracula, Bram Stocker"
+          }
+        ]
       },
       {
-        "id": 2,
-        "status": 0,
-        "icon": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
-        "name": "Dracula, Bram Stocker"
+        "id": 1,
+        "name": "French Books",
+        "elems":
+        [
+          {
+            "id": 0,
+            "status": 0,
+            "icon": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
+            "name": "L’étranger, Albert Camus"
+          },
+          {
+            "id": 1,
+            "status": 0,
+            "icon": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
+            "name": " Le dernier jour d’un condamné, Victor Hugo"
+          }
+        ]
       }
     ]
   },
   {
-    "id": 2,
-    "name": "French Books",
-    "elems":
+    "id": 1,
+    "name": "Movies",
+    "lists":
     [
       {
-        "id": 1,
-        "status": 0,
-        "icon": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
-        "name": "L’étranger, Albert Camus"
+        "id": 0,
+        "name": "Action Movies",
+        "elems":
+        [
+          {
+            "id": 0,
+            "status": 0,
+            "icon": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
+            "name": "Avengers: Endgame"
+          },
+          {
+            "id": 1,
+            "status": 0,
+            "icon": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
+            "name": "John Wick 4"
+          }
+        ]
       },
       {
-        "id": 2,
-        "status": 0,
-        "icon": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
-        "name": " Le dernier jour d’un condamné, Victor Hugo"
+        "id": 1,
+        "name": "Drama Movies",
+        "elems":
+        [
+          {
+            "id": 0,
+            "status": 0,
+            "icon": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
+            "name": "Titanic"
+          },
+          {
+            "id": 1,
+            "status": 0,
+            "icon": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
+            "name": "The Green Mile"
+          }
+        ]
       }
     ]
   }
 ]
+
