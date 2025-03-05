@@ -24,7 +24,7 @@ onMounted(() => {
                 <div class="w-full">
                     <h3 class="font-semibold">Appearance</h3>
                     <p class="text-gray-500 text-sm md:text-base w-full">Switch between dark and light mode for a comfortable viewing experience.</p>
-                    <div class="inline-flex rounded-md shadow-xs" role="group">
+                    <div class="inline-flex rounded-md shadow-xs">
                     <button type="button" class="px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-s-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white ">
                         Light theme
                     </button>
