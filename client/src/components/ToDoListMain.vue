@@ -1,7 +1,7 @@
 <template>
   <div class="m-5">
-    <h1 class="text-3xl font-semibold">Books</h1>
-    <p class="m-4">You have 3 "books" to-do lists.</p>
+    <h1 class="text-3xl font-semibold">{{ theme.name }}</h1>
+    <p class="m-4">You have {{ (theme.lists).length }} "{{ theme.name }}" to-do lists.</p>
     <div class="w-full md:block md:w-auto">
       <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
         <li>
@@ -34,6 +34,7 @@ export default {
     toggleListCreation () {
       this.listCreation = !this.listCreation
     }
-  }
+  },
+  props: ['theme']
 }
 </script>

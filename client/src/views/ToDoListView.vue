@@ -1,8 +1,8 @@
 <template>
   <div class="mx-44">
-    <ToDoListMain/>
+    <ToDoListMain :theme="theme"/>
     <ul class="mt-5 mb-5 divide-y rounded-xl">
-      <li>
+      <li v-for="(list, i) in theme.lists" :key="i">
         <details class="group">
           <summary class="w-full flex justify-between gap-3 px-4 py-3 font-medium marker:content-none hover:cursor-pointer">
             <span class="flex text-xl items-center">
@@ -12,7 +12,7 @@
                       d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z">
                 </path>
               </svg>
-              English Books
+              {{ list.name }}
             </span>
             <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 text-center inline-flex items-center">
               Delete ToDo List
@@ -21,7 +21,7 @@
               </svg>
             </button>
           </summary>
-          <ToDoListElem/>
+          <ToDoListElem :list="list" :listId="i"/>
         </details>
       </li>
     </ul>
@@ -36,6 +36,16 @@ export default {
   components: {
     ToDoListMain,
     ToDoListElem
+  },
+  props: ['themes'],
+  computed: {
+    theme () {
+      const theme = this.themes.find((p) => {
+        return p.id === Number(this.$route.params.id)
+      })
+      console.log(theme.lists.length)
+      return theme
+    }
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
     <li>
-      <h2 class="font-semibold text-2xl">English Books</h2>
+      <h2 class="font-semibold text-2xl">{{ listName }}</h2>
     </li>
     <li>
       <button type="button" @click="toggleElemCreation" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 text-center inline-flex items-center">
@@ -31,6 +31,7 @@ export default {
     toggleElemCreation () {
       this.elemCreation = !this.elemCreation
     }
-  }
+  },
+  props: ['listName']
 }
 </script>

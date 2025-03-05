@@ -33,7 +33,7 @@ const routes = [
     component: RegisterView
   },
   {
-    path: '/todolist',
+    path: '/todolist/:id',
     name: 'todolist',
     component: ToDoListView
   }

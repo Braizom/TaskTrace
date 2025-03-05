@@ -1,12 +1,13 @@
 <template>
   <MainHeader :connected="connected" @update-connected="updateConnected"/>
-  <router-view :connected="connected" @update-connected="updateConnected"/>
+  <router-view :connected="connected" @update-connected="updateConnected" :themes="contents" />
   <MainFooter/>
 </template>
 
 <script>
 import MainHeader from '@/components/MainHeader.vue'
 import MainFooter from '@/components/MainFooter.vue'
+import contents from '@/contents.json'
 
 export default {
   components: {
@@ -15,7 +16,8 @@ export default {
   },
   data () {
     return {
-      connected: false
+      connected: false,
+      contents: contents
     }
   },
   methods: {
