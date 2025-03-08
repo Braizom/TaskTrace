@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "autoprefixer": "^10.4.20",
+    "axios": "^1.8.1",
     "core-js": "^3.8.3",
     "flowbite": "^3.1.2",
     "postcss": "^8.5.3",

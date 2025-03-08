@@ -1,6 +1,11 @@
 module.exports = (connex, Sequelize) => {
     let User;
     User = connex.define('user', {
+        id: {
+            type: Sequelize.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
         firstname: {
             type: Sequelize.STRING,
             allowNull: false
@@ -15,7 +20,7 @@ module.exports = (connex, Sequelize) => {
             unique: true
         },
         birthdate: {
-            type: Sequelize.DATEONLY,
+            type: Sequelize.STRING,
             allowNull: false
         },
         email: {

@@ -8,11 +8,19 @@
 import MainHeader from '@/components/MainHeader.vue'
 import MainFooter from '@/components/MainFooter.vue'
 import contents from '@/contents.json'
+import UserDataService from '@/services/UserDataService'
 
 export default {
   components: {
     MainHeader,
     MainFooter
+  },
+  mounted () {
+    UserDataService.getAll()
+      .then(response => {
+        console.log(response)
+        console.log('ici dans App.vue')
+      })
   },
   data () {
     return {
