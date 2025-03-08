@@ -1,7 +1,9 @@
+require('dotenv').config(); // fetch environnemnt variables
+
 module.exports = {
-    HOST: 'localhost',
-    USER: 'root',
-    PASSWORD: 'Kn06082003',
-    DB: 'db_tasktrack',
-    dialect: 'mysql'
-}
+    HOST: process.env.DB_HOST,
+    USER: process.env.DB_USER,
+    PASSWORD: process.env.DB_PASSWORD,
+    DB: process.env.DB_NAME,
+    dialect: process.env.DB_DIALECT
+};
