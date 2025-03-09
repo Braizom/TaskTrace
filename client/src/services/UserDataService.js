@@ -10,8 +10,8 @@ class UserDataService {
     return http.post('/user', data)
   }
 
-  get (id) {
-    return http.get(`/user/${id}`)
+  findByEmail (logInfo) {
+    return http.post('/user/login', logInfo)
   }
 
   update (id, data) {

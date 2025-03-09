@@ -55,6 +55,7 @@ exports.findByUsername = (req, res) => {
             res.send(user)
         })
         .catch(err => {
+            console.log(err)
             res.status(500).send({
                 message: 'Could not find the data'
             })
@@ -62,6 +63,7 @@ exports.findByUsername = (req, res) => {
 }
 exports.findByEmail = (req, res) => {
     const email = req.body.email
+    console.log(req.body, 'dans findByEmail')
     User.findOne({where: { email: email }})
         .then(user => {
             if (!user) {
@@ -69,9 +71,20 @@ exports.findByEmail = (req, res) => {
                     message: 'email not found'
                 })
             }
-            res.send(user)
+            else{
+                if(user.password !== req.body.password) {
+                    return res.status(400).send({
+                        message: 'Incorrect password'
+                    })
+                }
+                else{
+                    res.send(user)
+                }
+
+            }
         })
         .catch(err => {
+            console.log(err)
             res.status(500).send({
                 message: 'Could not find the data'
             })
