@@ -1,6 +1,6 @@
 <template>
   <MainHeader :connected="connected" @update-connected="updateConnected"/>
-  <router-view :connected="connected" @update-connected="updateConnected" :themes="contents" />
+  <router-view :connected="connected" @update-connected="updateConnected" :themes="contents" :createTheme="createTheme" :createList="createList" :createElement="createElement"/>
   <MainFooter/>
 </template>
 
@@ -24,6 +24,17 @@ export default {
     updateConnected (status) {
       console.log('update of "connected" :', status)
       this.connected = status
+    },
+    createTheme (theme) {
+      console.log('create theme ', theme)
+      theme.id = contents.length
+      this.contents.unshift(theme)
+    },
+    createList (themeId, list) {
+      this.contents[themeId].lists.unshift(list)
+    },
+    createElement (themeId, listId, element) {
+      this.contents[themeId].lists[listId].elems.unshift(element)
     }
   }
 }

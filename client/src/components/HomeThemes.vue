@@ -2,8 +2,8 @@
   <div class="m-5">
     <h1 class="text-3xl font-semibold">Your Themes</h1>
     <ul class="grid grid-cols-2 md:grid-cols-3 gap-5 p-10">
-      <li v-if="createTheme">
-        <CreateTheme :toggleThemeCreation="toggleThemeCreation"/>
+      <li v-if="themeCreation">
+        <CreateTheme :toggleThemeCreation="toggleThemeCreation" :createTheme="createTheme" />
       </li>
       <li v-for="(theme, i) in themes" :key="i">
         <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm">
@@ -19,7 +19,7 @@
                 Delete
               </button>
             </span>
-            <p class="mb-3 font-normal text-gray-700">You have {{ theme.lists.length }} “{{ theme.name }}” To-Do List</p>
+            <p class="mb-3 font-normal text-gray-700">You have {{ (theme.lists).length }} “{{ theme.name }}” To-Do List</p>
           </div>
         </div>
       </li>
@@ -34,6 +34,6 @@ export default {
   components: {
     CreateTheme
   },
-  props: ['themes', 'createTheme', 'toggleThemeCreation']
+  props: ['themes', 'themeCreation', 'toggleThemeCreation', 'createTheme']
 }
 </script>
