@@ -25,18 +25,11 @@ export default {
       console.log('update of "connected" :', status)
       this.connected = status
     },
-    createTheme (theme) {
+    createTheme (theme, toggleThemeCreation) {
       console.log('create theme ', theme)
       theme.id = contents.length
       this.contents.unshift(theme)
-    },
-    /* createList (themeId, list) {
-      list.id = this.contents[themeId].lists.length
-      this.contents[themeId].lists.unshift(list)
-    }, */
-    createElement (themeId, listId, element) {
-      element.id = this.contents[themeId].lists[listId].elems.length
-      this.contents[themeId].lists[listId].elems.unshift(element)
+      toggleThemeCreation()
     }
   }
 }

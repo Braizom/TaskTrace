@@ -56,13 +56,13 @@
         [
           {
             "id": 0,
-            "status": 0,
+            "status": "To Do",
             "icon": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
             "name": "Avengers: Endgame"
           },
           {
             "id": 1,
-            "status": 0,
+            "status": "To Do",
             "icon": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
             "name": "John Wick 4"
           }
@@ -75,13 +75,13 @@
         [
           {
             "id": 0,
-            "status": 0,
+            "status": "To Do",
             "icon": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
             "name": "Titanic"
           },
           {
             "id": 1,
-            "status": 0,
+            "status": "To Do",
             "icon": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
             "name": "The Green Mile"
           }

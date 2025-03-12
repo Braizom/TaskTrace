@@ -15,7 +15,7 @@
       </div>
       <div class="p-5">
         <input v-model="theme.name" type="text" id="themeName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 mb-3" required placeholder="Theme Name"/>
-        <button type="button" @click="createTheme(theme)" class="text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 text-center inline-flex items-center">
+        <button type="button" @click="createTheme(theme, toggleThemeCreation)" class="text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 text-center inline-flex items-center">
           Save
         </button>
         <button type="button" @click="toggleThemeCreation" class="text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 text-center inline-flex items-center">

@@ -62,11 +62,13 @@ export default {
     createList (list) {
       list.id = this.theme.lists.length
       this.theme.lists.unshift(list)
+      this.listCreation = false
     },
-    createElementTest (listId, element) {
+    createElementTest (listId, element, toggleElementCreation) {
       console.log(listId, element)
       element.id = this.theme.lists[listId].elems.length
       this.theme.lists[listId].elems.unshift(element)
+      toggleElementCreation()
     }
   }
 }
