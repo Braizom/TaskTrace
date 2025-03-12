@@ -1,7 +1,10 @@
 <template>
   <div class="mx-44">
-    <ToDoListMain :theme="theme"/>
+    <ToDoListMain :theme="theme" :toggleListCreation="toggleListCreation"/>
     <ul class="mt-5 mb-5 divide-y rounded-xl">
+      <li v-if="listCreation">
+        <CreateList :toggleListCreation="toggleListCreation"/>
+      </li>
       <li v-for="(list, i) in theme.lists" :key="i">
         <details class="group">
           <summary class="w-full flex justify-between gap-3 px-4 py-3 font-medium marker:content-none hover:cursor-pointer">
@@ -31,9 +34,11 @@
 <script>
 import ToDoListMain from '@/components/ToDoListMain.vue'
 import ToDoListElem from '@/components/ToDoListElem.vue'
+import CreateList from '@/components/CreateList.vue'
 
 export default {
   components: {
+    CreateList,
     ToDoListMain,
     ToDoListElem
   },
@@ -45,6 +50,16 @@ export default {
       })
       console.log(theme.lists.length)
       return theme
+    }
+  },
+  data () {
+    return {
+      listCreation: false
+    }
+  },
+  methods: {
+    toggleListCreation () {
+      this.listCreation = !this.listCreation
     }
   }
 }
