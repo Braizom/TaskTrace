@@ -24,7 +24,7 @@
               </svg>
             </button>
           </summary>
-          <ToDoListElem :list="list" :listId="i"/>
+          <ToDoListElem :list="list" :listId="i" :createElementTest="createElementTest"/>
         </details>
       </li>
     </ul>
@@ -45,11 +45,9 @@ export default {
   props: ['themes'],
   computed: {
     theme () {
-      const theme = this.themes.find((p) => {
+      return this.themes.find((p) => {
         return p.id === Number(this.$route.params.id)
       })
-      console.log(theme.lists.length)
-      return theme
     }
   },
   data () {
@@ -64,6 +62,11 @@ export default {
     createList (list) {
       list.id = this.theme.lists.length
       this.theme.lists.unshift(list)
+    },
+    createElementTest (listId, element) {
+      console.log(listId, element)
+      element.id = this.theme.lists[listId].elems.length
+      this.theme.lists[listId].elems.unshift(element)
     }
   }
 }

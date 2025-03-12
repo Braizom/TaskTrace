@@ -1,6 +1,6 @@
 <template>
   <div class="w-full md:block md:w-auto mx-20">
-    <ToDoListElemMenu :listName="list.name"/>
+    <ToDoListElemMenu :listName="list.name" :createElementTest="createElementTest" :listId="listId"/>
     <ul>
       <li v-for="(elem, i) in list.elems" :key="i">
         <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-sm my-2">
@@ -36,11 +36,6 @@ export default {
     ToDoListElemMenu,
     ToDoListElemStatus
   },
-  props: ['list', 'listId'],
-  data (list) {
-    return {
-      elems: list.elems
-    }
-  }
+  props: ['list', 'listId', 'createElementTest']
 }
 </script>

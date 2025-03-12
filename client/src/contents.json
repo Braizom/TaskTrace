@@ -11,13 +11,13 @@
         [
           {
             "id": 0,
-            "status": 0,
+            "status": "To Do",
             "icon": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
             "name": "Oliver Twist, Charles Dickens"
           },
           {
             "id": 1,
-            "status": 2,
+            "status": "Done",
             "icon": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
             "name": "Dracula, Bram Stocker"
           }
@@ -30,13 +30,13 @@
         [
           {
             "id": 0,
-            "status": 1,
+            "status": "Doing",
             "icon": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
             "name": "L’étranger, Albert Camus"
           },
           {
             "id": 1,
-            "status": 0,
+            "status": "To Do",
             "icon": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
             "name": " Le dernier jour d’un condamné, Victor Hugo"
           }

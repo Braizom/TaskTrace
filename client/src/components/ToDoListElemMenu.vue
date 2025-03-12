@@ -12,7 +12,7 @@
       </button>
     </li>
   </ul>
-  <CreateElement v-if="elemCreation" :toggleElemCreation="toggleElemCreation"/>
+  <CreateElement v-if="elemCreation" :toggleElemCreation="toggleElemCreation" :createElementTest="createElementTest" :listId="listId"/>
 </template>
 
 <script>
@@ -32,6 +32,6 @@ export default {
       this.elemCreation = !this.elemCreation
     }
   },
-  props: ['listName']
+  props: ['listName', 'createElementTest', 'listId']
 }
 </script>

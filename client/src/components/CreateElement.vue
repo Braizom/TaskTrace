@@ -14,10 +14,10 @@
       <div class="w-full ms-10">
         <div class="w-full flex flex-wrap justify-between items-center mb-2">
           <div>
-            <input type="text" id="listName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required placeholder="Element Name"/>
+            <input v-model="element.name" type="text" id="listName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required placeholder="Element Name"/>
           </div>
           <div class="flex flex-wrap items-center">
-            <button type="button" class="rtl:space-x-reverse text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 text-center inline-flex items-center">
+            <button type="button" @click="createElementTest(listId, element)" class="rtl:space-x-reverse text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 text-center inline-flex items-center">
               Save
             </button>
             <button type="button" @click="toggleElemCreation" class="rtl:space-x-reverse text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 text-center inline-flex items-center">
@@ -27,19 +27,19 @@
         </div>
         <ul class="grid w-full gap-6 md:grid-cols-3">
           <li>
-            <input type="radio" id="CreateDo" name="hosting" value="CreateDo" class="hidden peer" required>
+            <input v-model="element.status" type="radio" id="CreateDo" name="hosting" value="To Do" class="hidden peer" required>
             <label for="CreateDo" class="text-lg font-semibold inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer  peer-checked:bg-green-600  peer-checked:text-white hover:text-gray-600 hover:bg-gray-100 ">
               To Do
             </label>
           </li>
           <li>
-            <input type="radio" id="CreateDoing" name="hosting" value="CreateDoing" class="hidden peer">
+            <input v-model="element.status" type="radio" id="CreateDoing" name="hosting" value="Doing" class="hidden peer">
             <label for="CreateDoing" class="text-lg font-semibold inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer  peer-checked:bg-green-600  peer-checked:text-white hover:text-gray-600 hover:bg-gray-100 ">
               Doing
             </label>
           </li>
           <li>
-            <input type="radio" id="CreateDone" name="hosting" value="CreateDone" class="hidden peer">
+            <input v-model="element.status" type="radio" id="CreateDone" name="hosting" value="Done" class="hidden peer">
             <label for="CreateDone" class="text-lg font-semibold inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer  peer-checked:bg-green-600  peer-checked:text-white hover:text-gray-600 hover:bg-gray-100 ">
               Done
             </label>
@@ -52,6 +52,15 @@
 
 <script>
 export default {
-  props: ['toggleElemCreation']
+  data () {
+    return {
+      element: {
+        name: '',
+        status: '',
+        icon: ''
+      }
+    }
+  },
+  props: ['toggleElemCreation', 'createElementTest', 'listId']
 }
 </script>
