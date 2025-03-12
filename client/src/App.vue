@@ -1,6 +1,6 @@
 <template>
   <MainHeader :connected="connected" @update-connected="updateConnected"/>
-  <router-view :connected="connected" @update-connected="updateConnected" :themes="contents" :createTheme="createTheme" :createList="createList" :createElement="createElement"/>
+  <router-view :connected="connected" @update-connected="updateConnected" :themes="contents" :createTheme="createTheme" :deleteTheme="deleteTheme"/>
   <MainFooter/>
 </template>
 
@@ -30,6 +30,9 @@ export default {
       theme.id = contents.length
       this.contents.unshift(theme)
       toggleThemeCreation()
+    },
+    deleteTheme (index) {
+      this.contents.splice(index, 1)
     }
   }
 }
