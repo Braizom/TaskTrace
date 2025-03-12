@@ -3,7 +3,7 @@
     <ToDoListMain :theme="theme" :toggleListCreation="toggleListCreation"/>
     <ul class="mt-5 mb-5 divide-y rounded-xl">
       <li v-if="listCreation">
-        <CreateList :toggleListCreation="toggleListCreation"/>
+        <CreateList :toggleListCreation="toggleListCreation" :createList="createList"/>
       </li>
       <li v-for="(list, i) in theme.lists" :key="i">
         <details class="group">
@@ -60,6 +60,10 @@ export default {
   methods: {
     toggleListCreation () {
       this.listCreation = !this.listCreation
+    },
+    createList (list) {
+      list.id = this.theme.lists.length
+      this.theme.lists.unshift(list)
     }
   }
 }

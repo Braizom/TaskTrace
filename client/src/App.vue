@@ -30,10 +30,12 @@ export default {
       theme.id = contents.length
       this.contents.unshift(theme)
     },
-    createList (themeId, list) {
+    /* createList (themeId, list) {
+      list.id = this.contents[themeId].lists.length
       this.contents[themeId].lists.unshift(list)
-    },
+    }, */
     createElement (themeId, listId, element) {
+      element.id = this.contents[themeId].lists[listId].elems.length
       this.contents[themeId].lists[listId].elems.unshift(element)
     }
   }
