@@ -11,7 +11,7 @@
             <div class="w-full ms-10">
               <div class="w-full flex flex-wrap justify-between items-center mb-2">
                 <h3 class="text-lg font-medium text-gray-900">{{ elem.name }}</h3>
-                <button type="button" class="rtl:space-x-reverse text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 text-center inline-flex items-center">
+                <button type="button" @click="deleteElement(listId, i)" class="rtl:space-x-reverse text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 text-center inline-flex items-center">
                   <svg class="w-5 h-5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M4 12C4 11.4477 4.44772 11 5 11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H5C4.44772 13 4 12.5523 4 12Z" fill="#ffffff"></path>
                   </svg>
@@ -36,6 +36,6 @@ export default {
     ToDoListElemMenu,
     ToDoListElemStatus
   },
-  props: ['list', 'listId', 'createElementTest']
+  props: ['list', 'listId', 'createElementTest', 'deleteElement']
 }
 </script>
