@@ -14,8 +14,7 @@
       <div class="w-full ms-10">
         <div class="w-full flex flex-wrap justify-between items-center mb-2">
           <div>
-            <label for="listName" class="block mb-2 text-sm font-medium text-gray-900">Element Name</label>
-            <input type="text" id="listName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required/>
+            <input type="text" id="listName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required placeholder="Element Name"/>
           </div>
           <div class="flex flex-wrap items-center">
             <button type="button" class="rtl:space-x-reverse text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 text-center inline-flex items-center">
