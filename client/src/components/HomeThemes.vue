@@ -15,7 +15,7 @@
               <router-link :to="{ name:'todolist', params: { id: theme.id } }">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ theme.name }}</h5>
               </router-link>
-              <button type="button" class="text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 text-center">
+              <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 text-center">
                 Delete
               </button>
             </span>
