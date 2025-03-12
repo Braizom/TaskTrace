@@ -1,7 +1,7 @@
 <template>
   <div class="mx-40">
-    <HomeMain/>
-    <HomeThemes :themes="themes"/>
+    <HomeMain :toggleThemeCreation="toggleThemeCreation"/>
+    <HomeThemes :themes="themes" :themeCreation="themeCreation" :toggleThemeCreation="toggleThemeCreation" :createTheme="createTheme" :deleteTheme="deleteTheme"/>
   </div>
 </template>
 
@@ -14,6 +14,16 @@ export default {
     HomeMain,
     HomeThemes
   },
-  props: ['themes']
+  props: ['themes', 'createTheme', 'deleteTheme'],
+  data () {
+    return {
+      themeCreation: false
+    }
+  },
+  methods: {
+    toggleThemeCreation () {
+      this.themeCreation = !this.themeCreation
+    }
+  }
 }
 </script>
