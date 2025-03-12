@@ -17,7 +17,7 @@
           },
           {
             "id": 1,
-            "status": 0,
+            "status": 2,
             "icon": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
             "name": "Dracula, Bram Stocker"
           }
@@ -30,7 +30,7 @@
         [
           {
             "id": 0,
-            "status": 0,
+            "status": 1,
             "icon": "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
             "name": "L’étranger, Albert Camus"
           },

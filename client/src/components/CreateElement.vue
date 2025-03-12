@@ -9,8 +9,7 @@
           class="cursor-pointer absolute block h-40 w-40 opacity-0 pin-r pin-t"
           type="file"
           name="documents[]"
-          accept="image/*" required
-        >
+          accept="image/*" required>
       </div>
       <div class="w-full ms-10">
         <div class="w-full flex flex-wrap justify-between items-center mb-2">
