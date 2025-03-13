@@ -39,9 +39,8 @@ module.exports = (connex, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: true
         },
-        connected: {
-            type: Sequelize.BOOLEAN,
-            defaultValue: false
+        token: {
+            type: Sequelize.STRING
         }
     });
     return User;

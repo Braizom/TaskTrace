@@ -12,35 +12,52 @@
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
         </svg>
       </button>
-      <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+      <div v-if="user && Object.keys(user).length > 0"  class="hidden w-full md:block md:w-auto" id="navbar-default">
         <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 items-center">
-          <li v-if="connected">
+          <li >
             <router-link to="/home" class="bg-ttHeaderBtn py-1 px-1 text-ttHeaderText rounded-md  hover:bg-black hover:text-white ">Home</router-link>
           </li>
-          <li v-if="connected">
+          <li >
             <router-link to="/profile" class="bg-ttHeaderBtn block py-1 px-1 text-ttHeaderText rounded-md md:border-0  hover:bg-black hover:text-white ">Profile</router-link>
           </li>
-          <li v-if="connected">
-            <router-link to="/parameters" class="bg-ttHeaderBtn block py-1 px-1 text-ttHeaderText rounded-md md:border-0 hover:bg-black hover:text-white">Parameters</router-link>
+          <li >
+            <router-link  to="/parameters" class="bg-ttHeaderBtn block py-1 px-1 text-ttHeaderText rounded-md md:border-0 hover:bg-black hover:text-white">Parameters</router-link>
           </li>
-          <li v-if="connected">
+          <li >
             <button @click="logout" class="bg-black text-white px-3 py-1 rounded-md hover:bg-red-200 hover:text-black">Log Out</button>
+          </li>
+          <li>
+            <button @click="test"> click </button>
           </li>
         </ul>
       </div>
     </div>
   </nav>
+
 </template>
 
 <script>
+import UserDataService from '@/services/UserDataService'
 export default {
-  props: {
-    connected: Boolean
-  },
+  props: ['user'],
   methods: {
     logout () {
-      this.$emit('update-connected', false)
-      this.$router.push('/')
+      console.log('juste avant de deco', this.user)
+      UserDataService.logout()
+        .then(response => {
+          console.log(response)
+          localStorage.removeItem('token')
+          this.$store.dispatch('user', null)
+          this.$router.push('/')
+          this.$emit('update-user', {})
+          this.$emit('update-connected', false)
+        })
+        .catch(error => {
+          console.log(error, 'lors de la deconnexion')
+        })
+    },
+    test () {
+      console.log(this.user)
     }
   }
 }

@@ -1,12 +1,33 @@
 <script setup>
 import { onMounted } from 'vue'
 import { initFlowbite } from 'flowbite'
-// initialize components based on data attribute selectors
+import UserDataService from '@/services/UserDataService'
+
 onMounted(() => {
   initFlowbite()
 })
 </script>
 
+<script>
+export default {
+  props: ['user'],
+  methods: {
+    async deleteAccount () {
+      try {
+        console.log('dans la fonction deleteAccount, voici this.user : ', this.user)
+        const response = await UserDataService.deleteUser(this.user.id)
+        console.log(response)
+        this.$emit('update-user', {})
+        alert('Account deleted successfully.')
+        this.$router.push('/')
+      } catch (error) {
+        console.error('Error deleting account:', error)
+        alert('An error occurred while deleting the account.')
+      }
+    }
+  }
+}
+</script>
 <template>
     <div>
         <h1 class="text-2xl font-bold text-ttHeaderText sm:text-center">Settings</h1>
@@ -15,8 +36,8 @@ onMounted(() => {
                 <span class="text-lg bg-gray-200 p-2 rounded-full">ℹ️</span>
                 <div class="w-full">
                     <h3 class="font-semibold">Change Password</h3>
-                    <p class="text-gray-500 text-sm md:text-base w-full">Member since 06 August 2020</p>
-                    <button type="submit" class="w-1/2 bg-black text-white py-2 rounded-lg hover:bg-gray-800 my-2">Save</button>
+                    <p class="text-gray-500 text-sm md:text-base w-full">Change your password</p>
+                    <button type="submit" class="w-1/2 bg-black text-white py-2 rounded-lg hover:bg-gray-800 my-2">change</button>
                 </div>
             </div>
             <div class="flex items-center space-x-4 p-4 w-full">
@@ -54,7 +75,7 @@ onMounted(() => {
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                                     </svg>
                                     <h3 class="mb-5 text-lg font-normal text-gray-500">Are you sure you want to delete your account and all your data ?</h3>
-                                    <button data-modal-hide="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                    <button @click="deleteAccount" data-modal-hide="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                                         Yes, I'm sure
                                     </button>
                                     <button data-modal-hide="popup-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">No, cancel</button>

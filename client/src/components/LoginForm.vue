@@ -32,9 +32,7 @@
 <script>
 import UserDataService from '@/services/UserDataService'
 export default {
-  props: {
-    connected: Boolean
-  },
+  props: ['user'],
   data () {
     return {
       email: '',
@@ -48,13 +46,15 @@ export default {
         email: this.email,
         password: this.password
       }
-      UserDataService.findByEmail(logInfo)
+      UserDataService.loginVerification(logInfo)
         .then((response) => {
           console.log(response, 'je suis dans loginform le handlelogin')
           this.message = null
           this.$emit('update-connected', true)
           this.$router.push('/home')
-          console.log('Logging in with:', this.email, this.password)
+          this.$store.dispatch('user', response.data.user)
+          this.$emit('update-user', response.data)
+          // console.log('Logging in with:', this.email, this.password)
         })
         .catch((e) => {
           this.message = e.response.data.message

@@ -1,5 +1,10 @@
 const db = require('../models')
-const User  = db.users
+// const userModel = require('../models/user.model')
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+const User = db.users
+//const OP = db.Sequelize.Op
+// const https = require('http')
 
 exports.findAll = (req, res) => {
     User.findAll()
@@ -33,15 +38,27 @@ exports.create = async (req, res) => {
                 message: "Email already in use"
             });
         }
-        const newUser = await User.create(req.body);
-        res.send(newUser);
+        const salt = await bcrypt.genSalt(10)
+        const hashPassword = await bcrypt.hash(req.body.password, salt)
+        const newUser = await User.create({ ...req.body, password: hashPassword });
 
+        const token = jwt.sign({ id: newUser.id }, 'secret')
+        await newUser.update({ token })
+        res.cookie('jwt', token, {
+            httpOnly: true,
+            maxAge: 24 * 60 * 60 * 1000
+        })
+
+        res.send({
+            token: token,
+            user: newUser
+        })
     } catch (err) {
         res.status(500).send({
             message: 'Could not insert the data'
-        });
+        })
     }
-};
+}
 
 exports.findByUsername = (req, res) => {
     const username = req.body.username
@@ -61,34 +78,119 @@ exports.findByUsername = (req, res) => {
             })
         })
 }
-exports.findByEmail = (req, res) => {
-    const email = req.body.email
-    console.log(req.body, 'dans findByEmail')
-    User.findOne({where: { email: email }})
-        .then(user => {
-            if (!user) {
-                return res.status(404).send({
-                    message: 'email not found'
-                })
-            }
-            else{
-                if(user.password !== req.body.password) {
-                    return res.status(400).send({
-                        message: 'Incorrect password'
-                    })
-                }
-                else{
-                    res.send(user)
-                }
+exports.loginVerification = async (req, res) => {
+    try {
+        const {email} = req.body;
+        const password1 = req.body.password;
+        console.log(req.body, "dans loginVerification")
 
-            }
-        })
-        .catch(err => {
-            console.log(err)
-            res.status(500).send({
-                message: 'Could not find the data'
+        const user = await User.findOne({where: {email: email}})
+        if (!user) {
+            return res.status(404).send({
+                message: 'User not found'
             })
+        }
+        const verifyPassword = await bcrypt.compare(password1, user.password)
+        if (!verifyPassword) {
+            return res.status(400).send({
+                message: 'Password Incorrect'
+            })
+        }
+        const token = jwt.sign({id: user.id}, 'secret')
+        res.cookie('jwt', token, {
+            httpOnly: true,
+            maxAge: 24 * 60 * 60 * 1000
         })
+        user.update({
+            token: token
+        })
+        const {password, ...data} = await user.toJSON()
+        res.send({
+            token: token,
+            user: data
+        })
+    } catch (err) {
+        res.status(500).send({
+            message: 'Could not find the data'
+        })
+    }
+}
+
+exports.auth = async (req, res) => {
+    try {
+        const cookie = req.cookies['jwt']
+        const claims = jwt.verify(cookie, 'secret')
+
+        if (!claims) {
+            return res.status(401).send({
+                message: 'unauthenticated'
+            })
+        }
+
+        const user = await User.findOne({where: claims.id})
+        const {password, ...data} = await user.toJSON()
+        res.send(data)
+
+    } catch (e) {
+        return res.status(401).send({
+            message: 'unauthenticated'
+        })
+    }
+}
+
+exports.logout = async (req, res) => {
+    try {
+        // Récupérer l'utilisateur à partir du token
+        const cookie = req.cookies['jwt']
+        if (!cookie) {
+            return res.status(401).send({ message: 'Not authenticated' })
+        }
+
+        const claims = jwt.verify(cookie, 'secret')
+        if (!claims) {
+            return res.status(401).send({ message: 'Invalid token' })
+        }
+
+        // Trouver l'utilisateur et supprimer son token en base de données
+        await User.update({ token: null }, { where: { id: claims.id } })
+
+        // Supprimer le cookie JWT
+        res.cookie('jwt', '', { maxAge: 0 })
+
+        res.status(200).send({ message: 'Logout successful' })
+    } catch (error) {
+        res.status(500).send({ message: 'Error logging out' })
+    }
+};
+
+exports.deleteUser = async (req, res) => {
+    try {
+        const cookie = req.cookies['jwt']
+        if (!cookie) {
+            return res.status(401).send({ message: 'Not authenticated' })
+        }
+
+        const claims = jwt.verify(cookie, 'secret')
+        if (!claims) {
+            return res.status(401).send({ message: 'Invalid token' })
+        }
+        await User.update({ token: null }, { where: { id: claims.id } })
+        res.cookie('jwt', '', { maxAge: 0 })
+        console.log(req.body,'ON EST BIEN DANS DELETEUSER DU BACKEND !!!')
+        const { id } = req.params;
+        const user = await User.findByPk(id)
+        if (!user) {
+            return res.status(404).send({
+                message: "User not found"
+            })
+        }
+        await user.destroy();
+        res.send({ message: "User deleted successfully" })
+    } catch (err) {
+        res.status(500).send({
+            message: "Could not delete the user"
+        })
+    }
 }
 
 // exports.udpate = (req, res) => {
