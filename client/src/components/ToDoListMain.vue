@@ -15,26 +15,10 @@
       </ul>
     </div>
   </div>
-  <CreateList v-if="listCreation" :toggleListCreation="toggleListCreation"/>
 </template>
 
 <script>
-import CreateList from '@/components/CreateList.vue'
-
 export default {
-  components: {
-    CreateList
-  },
-  data () {
-    return {
-      listCreation: false
-    }
-  },
-  methods: {
-    toggleListCreation () {
-      this.listCreation = !this.listCreation
-    }
-  },
-  props: ['theme']
+  props: ['theme', 'toggleListCreation']
 }
 </script>
