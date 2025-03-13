@@ -15,14 +15,14 @@ onMounted(() => {
                 <span class="text-lg bg-gray-200 p-2 rounded-full">ℹ️</span>
                 <div class="w-full">
                     <h3 class="font-semibold">Registration date</h3>
-                    <p class="text-gray-500 text-sm md:text-base w-full">Member since 06 August 2020</p>
+                    <p class="text-gray-500 text-sm md:text-base w-full">Member since {{ user.createdAt ? user.createdAt.split('T')[0] : 'N/A' }}</p>
                 </div>
             </div>
             <div class="flex items-center space-x-4 p-4 w-full">
                 <span class="text-lg bg-gray-200 p-2 rounded-full">ℹ️</span>
                 <div class="w-full">
                     <h3 class="font-semibold">Email</h3>
-                    <p class="text-gray-500 text-sm md:text-base w-full">john.doe@trolleur.net</p>
+                    <p class="text-gray-500 text-sm md:text-base w-full">{{ user.email }}</p>
                 </div>
             </div>
             <div class="flex items-center space-x-4 p-4 w-full">
@@ -68,3 +68,12 @@ onMounted(() => {
         </div>
     </div>
 </template>
+
+<script>
+export default {
+  props: {
+    user: Object
+  },
+  emits: ['updateUser']
+}
+</script>

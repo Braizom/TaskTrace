@@ -1,14 +1,12 @@
 <template>
-  <LoginForm :connected="connected" @update-connected="$emit('update-connected', $event)" />
+  <LoginForm :connected="connected" @update-connected="$emit('update-connected', $event)" :user = "user" @update-user="$emit('update-user', $event)" />
 </template>
 
 <script>
 import LoginForm from '@/components/LoginForm.vue'
 
 export default {
-  props: {
-    connected: Boolean
-  },
+  props: ['user', 'connected'],
   components: {
     LoginForm
   }

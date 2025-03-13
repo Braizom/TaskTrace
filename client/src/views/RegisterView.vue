@@ -1,14 +1,12 @@
 <template>
-  <RegisterForm :connected="connected" @update-connected="$emit('update-connected', $event)" />
+  <RegisterForm :user="user" :connected="connected" @update-connected="$emit('update-connected', $event)" @update-user="$emit('update-user', $event)" />
 </template>
 
 <script>
 import RegisterForm from '@/components/RegisterForm.vue'
 
 export default {
-  props: {
-    connected: Boolean
-  },
+  props: ['user', 'connected'],
   components: {
     RegisterForm
   }
