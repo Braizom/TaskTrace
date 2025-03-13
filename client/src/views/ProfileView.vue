@@ -1,6 +1,6 @@
 <template>
   <div class="my-10">
-    <InformationPofil :user = "user" />
+    <InformationPofil :user = "user" @update-user="$emit('update-user', $event)" />
     <AccountInformation :user = "user" @update-user="$emit('update-user', $event)"/>
   </div>
 

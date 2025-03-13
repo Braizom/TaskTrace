@@ -193,10 +193,45 @@ exports.deleteUser = async (req, res) => {
     }
 }
 
-// exports.udpate = (req, res) => {
+exports.updateUser = async (req, res) => {
+    try{
+        const {id} = req.params
+        const updateData = req.body
+        const user = await User.findByPk(id)
+        if (!user) {
+            return res.status(404).send({ message: "User not found" })
+        }
+        await user.update(updateData);
+        res.send({ message: "User updated successfully", user })
+    } catch (err) {
+        res.status(500).send({ message: "Could not update the user" })
+    }
+}
 
-// }
-
+exports.changePassword = async (req, res) => {
+    try {
+        console.log("-------------------- dans changePassword backend ------------- : ",req.body)
+        const { id } = req.params
+        const { actualPassword, newPassword, confirmPassword } = req.body
+        const user = await User.findByPk(id)
+        if (!user) {
+            return res.status(404).send({ message: "User not found" })
+        }
+        const isMatch = await bcrypt.compare(actualPassword, user.password)
+        if (!isMatch) {
+            return res.status(400).send({ message: "Incorrect actual password" })
+        }
+        if (newPassword !== confirmPassword) {
+            return res.status(400).send({ message: "New passwords do not match" })
+        }
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(newPassword, salt);
+        await user.update({ password: hashedPassword });
+        res.send({ message: "Password updated successfully" });
+    } catch (err) {
+        res.status(500).send({ message: "Could not update the password" });
+    }
+};
 // exports.delete = (req, res) => {
 
 // }

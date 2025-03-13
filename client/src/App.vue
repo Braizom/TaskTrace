@@ -42,6 +42,13 @@ export default {
     updateUser (updatedUser) {
       console.log('dans updateUser : ', updatedUser)
       this.user = updatedUser.user ? updatedUser.user : updatedUser
+      UserDataService.updateUser(this.user.id, this.user)
+        .then(response => {
+          console.log('User updated successfully:', response.data)
+        })
+        .catch(error => {
+          console.error('Error updating user:', error)
+        })
     },
     updateConnected (status) {
       console.log('update of "connected" :', status)

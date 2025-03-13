@@ -15,22 +15,21 @@ class UserDataService {
   }
 
   auth () {
-    // On va dabord verif si ya un token pour éviter les msg d'erruers dans la console
-    /*
-    const token = localStorage.getItem('token') || sessionStorage.getItem('token')
-    if (!token) {
-      return console.error('Token not found')
-    }
-    */
     return http.get('/user/auth', { withCredentials: true })
+  }
+
+  changePassword (id, data) {
+    console.log('id : ', id, 'data : ', JSON.stringify(data))
+    return http.put(`/user/changePassword/${id}`, data, { withCredentials: true })
   }
 
   logout () {
     return http.get('/user/logout', { withCredentials: true })
   }
 
-  update (id, data) {
-    return http.put(`/user/${id}`, data)
+  updateUser (id, data) {
+    console.log('le id dans update de userDataService.js et les data : ', id, data)
+    return http.put(`/user/updateUser/${id}`, data)
   }
 
   deleteUser (id) {
