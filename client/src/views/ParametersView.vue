@@ -1,6 +1,6 @@
 <template>
   <div class="my-10">
-    <SettingsParameters/>
+    <SettingsParameters :user = "user" @update-user="$emit('update-user', $event)"/>
   </div>
 
 </template>
@@ -9,6 +9,7 @@
 import SettingsParameters from '@/components/SettingsParameters.vue'
 
 export default {
+  props: ['user'],
   components: {
     SettingsParameters
   }

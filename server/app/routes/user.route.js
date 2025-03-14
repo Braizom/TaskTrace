@@ -6,6 +6,8 @@ module.exports = app => {
     router.post('/login',user.loginVerification)
     router.get('/auth', user.auth)
     router.get('/logout', user.logout)
-    router.delete("/delete/:id", user.deleteUser);
+    router.put('/updateUser/:id',user.updateUser)
+    router.delete("/delete/:id", user.deleteUser)
+    router.put("/changePassword/:id", user.changePassword)
     app.use('/api/user', router)
 }
