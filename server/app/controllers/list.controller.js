@@ -2,6 +2,7 @@ const db = require('../models')
 const List = db.lists
 
 exports.findAll = (req, res) => {
+    console.log(req.query)
     List.findAll({ where: { themeId: req.params.id } })
         .then(data => {
             res.send(data)

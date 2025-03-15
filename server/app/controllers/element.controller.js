@@ -2,7 +2,7 @@ const db = require('../models')
 const Element = db.elements
 
 exports.findAll = (req, res) => {
-    Element.findAll({ where: { themeId: req.params.id } })
+    Element.findAll({ where: { listId: req.params.id } })
         .then(data => {
             res.send(data)
         })

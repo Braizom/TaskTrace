@@ -1,5 +1,5 @@
 module.exports = app => {
-    const list = require('../controllers/theme.controller.js')
+    const list = require('../controllers/list.controller')
     const router = require('express').Router()
 
     router.get('/:id', list.findAll)
