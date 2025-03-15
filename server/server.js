@@ -18,6 +18,7 @@ const db = require('./app/models')
 db.connex.sync()
 
 require('./app/routes/user.route')(app)
+require('./app/routes/theme.route')(app)
 
 const PORT = 8082
 app.listen(PORT, () => {
