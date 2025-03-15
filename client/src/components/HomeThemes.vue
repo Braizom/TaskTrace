@@ -38,7 +38,12 @@ export default {
   methods: {
     deleteTheme (index, themeId) {
       ThemeDataService.delete(themeId)
-      this.removeTheme(index)
+        .then((response) => {
+          this.removeTheme(index)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 }

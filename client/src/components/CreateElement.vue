@@ -17,7 +17,7 @@
             <input v-model="element.name" type="text" id="listName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required placeholder="Element Name"/>
           </div>
           <div class="flex flex-wrap items-center">
-            <button type="button" @click="createElementTest(listId, element, toggleElemCreation)" class="rtl:space-x-reverse text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 text-center inline-flex items-center">
+            <button type="button" @click="newElement(listId, element, toggleElemCreation)" class="rtl:space-x-reverse text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 text-center inline-flex items-center">
               Save
             </button>
             <button type="button" @click="toggleElemCreation" class="rtl:space-x-reverse text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 text-center inline-flex items-center">
@@ -51,16 +51,30 @@
 </template>
 
 <script>
+import ElementDataService from '@/services/ElementDataService'
+
 export default {
   data () {
     return {
       element: {
         name: '',
-        status: '',
-        icon: ''
+        status: ''
       }
     }
   },
-  props: ['toggleElemCreation', 'createElementTest', 'listId']
+  props: ['toggleElemCreation', 'addElement', 'listId', 'list'],
+  methods: {
+    newElement (listId, element, toggleElemCreation) {
+      element.listId = this.list.id
+      ElementDataService.create(element.listId, element)
+        .then(response => {
+          const element = response.data
+          this.addElement(listId, element, toggleElemCreation)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
+  }
 }
 </script>

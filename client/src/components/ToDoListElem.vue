@@ -1,8 +1,9 @@
 <template>
   <div class="w-full md:block md:w-auto mx-20">
-    <ToDoListElemMenu :listName="list.name" :createElementTest="createElementTest" :listId="listId"/>
+    <ToDoListElemMenu :list="list" :addElement="addElement" :listId="listId"/>
     <ul>
       <li v-for="(elem, i) in list.elems" :key="i">
+        {{ elem.id }}
         <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-sm my-2">
           <div class="w-full flex items-center">
             <svg class="h-52 w-52" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -11,7 +12,7 @@
             <div class="w-full ms-10">
               <div class="w-full flex flex-wrap justify-between items-center mb-2">
                 <h3 class="text-lg font-medium text-gray-900">{{ elem.name }}</h3>
-                <button type="button" @click="deleteElement(listId, i)" class="rtl:space-x-reverse text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 text-center inline-flex items-center">
+                <button type="button" @click="deleteElement(listId, i, elem.id)" class="rtl:space-x-reverse text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 text-center inline-flex items-center">
                   <svg class="w-5 h-5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M4 12C4 11.4477 4.44772 11 5 11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H5C4.44772 13 4 12.5523 4 12Z" fill="#ffffff"></path>
                   </svg>
@@ -30,12 +31,25 @@
 <script>
 import ToDoListElemMenu from '@/components/ToDoListElemMenu.vue'
 import ToDoListElemStatus from '@/components/ToDoListElemStatus.vue'
+import ElementDataService from '@/services/ElementDataService'
 
 export default {
   components: {
     ToDoListElemMenu,
     ToDoListElemStatus
   },
-  props: ['list', 'listId', 'createElementTest', 'deleteElement']
+  props: ['list', 'listId', 'addElement', 'removeElement'],
+  methods: {
+    deleteElement (listId, index, id) {
+      console.log('clicked delete ' + id)
+      ElementDataService.delete(id)
+        .then(response => {
+          this.removeElement(listId, index)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
+  }
 }
 </script>
