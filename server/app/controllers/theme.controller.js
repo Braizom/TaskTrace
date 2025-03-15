@@ -2,7 +2,7 @@ const db = require('../models')
 const Theme = db.themes
 
 exports.findAll = (req, res) => {
-    Theme.find({ where: { userId: req.params.id } })
+    Theme.findAll({ where: { userId: req.params.id } })
         .then(data => {
             res.send(data)
         })

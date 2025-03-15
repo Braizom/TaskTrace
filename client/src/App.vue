@@ -1,14 +1,14 @@
 <template>
-  <MainHeader :connected="connected" @update-connected="updateConnected"  :user = "user" @update-user="updateUser" :themes="contents"/>
-  <router-view :connected="connected" @update-connected="updateConnected" :user = "user" @update-user="updateUser" :themes="contents" :createTheme="createTheme" :deleteTheme="deleteTheme"/>
+  <MainHeader :connected="connected" @update-connected="updateConnected"  :user = "user" @update-user="updateUser"/>
+  <router-view :connected="connected" @update-connected="updateConnected" :user = "user" @update-user="updateUser" :themes="themes" :addTheme="addTheme" :removeTheme="removeTheme"/>
   <MainFooter/>
 </template>
 
 <script>
 import MainHeader from '@/components/MainHeader.vue'
 import MainFooter from '@/components/MainFooter.vue'
-import contents from '@/contents.json'
 import UserDataService from '@/services/UserDataService'
+import ThemeDataService from '@/services/ThemeDataService'
 // import { mapGetters } from 'vuex'
 export default {
   components: {
@@ -16,6 +16,7 @@ export default {
     MainFooter
   },
   mounted () {
+    let check = true
     UserDataService.auth()
       .then(response => {
         console.log('User authentic :', response.data)
@@ -23,6 +24,17 @@ export default {
         this.connected = true
         console.log('this.data dans App.vue : ', this.user)
         console.log(response.data)
+        check = false
+
+        ThemeDataService.findAll(this.user.id)
+          .then(response => {
+            this.themes = response.data
+            console.log('themes found :', this.themes)
+            console.log('other stuff :', this.themes.length)
+          })
+          .catch(error => {
+            console.log(error)
+          })
       })
       .catch(() => {
         console.log('User non authenticated')
@@ -30,12 +42,23 @@ export default {
         this.user = {}
         this.$router.push('/')
       })
+    if (check) {
+      ThemeDataService.findAll(this.user.id)
+        .then(response => {
+          this.themes = response.data
+          console.log('themes found :', this.themes)
+          console.log('other stuff :', this.themes.length)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
   },
   data () {
     return {
       user: {},
       connected: false,
-      contents: contents
+      themes: []
     }
   },
   methods: {
@@ -54,14 +77,13 @@ export default {
       console.log('update of "connected" :', status)
       this.connected = status
     },
-    createTheme (theme, toggleThemeCreation) {
+    addTheme (theme, toggleThemeCreation) {
       console.log('create theme ', theme)
-      theme.id = contents.length
-      this.contents.unshift(theme)
+      this.themes.unshift(theme)
       toggleThemeCreation()
     },
-    deleteTheme (index) {
-      this.contents.splice(index, 1)
+    removeTheme (index) {
+      this.themes.splice(index, 1)
     }
   }
 }
