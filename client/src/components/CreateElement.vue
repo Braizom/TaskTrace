@@ -65,6 +65,9 @@ export default {
   props: ['toggleElemCreation', 'addElement', 'listId', 'list'],
   methods: {
     newElement (listId, element, toggleElemCreation) {
+      if (element.name === '' || element.status === '') {
+        return
+      }
       element.listId = this.list.id
       ElementDataService.create(element.listId, element)
         .then(response => {

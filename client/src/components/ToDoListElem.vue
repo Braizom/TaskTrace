@@ -3,7 +3,6 @@
     <ToDoListElemMenu :list="list" :addElement="addElement" :listId="listId"/>
     <ul>
       <li v-for="(elem, i) in list.elems" :key="i">
-        {{ elem.id }}
         <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-sm my-2">
           <div class="w-full flex items-center">
             <svg class="h-52 w-52" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -19,7 +18,26 @@
                   Delete Element
                 </button>
               </div>
-              <ToDoListElemStatus :status="elem.status" :elem="i" :list="listId"/>
+              <ul class="grid w-full gap-6 md:grid-cols-3">
+                <li>
+                  <input @click="changeStatus(listId, i, 'To Do', elem)" type="radio" :id="listId.toString() + i.toString() + 1" :name=" listId.toString() + i.toString() " value="To Do" class="hidden peer" :checked="elem.status === 'To Do'">
+                  <label :for="listId.toString() + i.toString() + 1" class="text-lg font-semibold inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer  peer-checked:bg-green-600  peer-checked:text-white hover:text-gray-600 hover:bg-gray-100 ">
+                    To Do
+                  </label>
+                </li>
+                <li>
+                  <input @click="changeStatus(listId, i, 'Doing', elem)" type="radio" :id="listId.toString() + i.toString() + 2" :name="listId.toString() + i.toString()" value="Doing" class="hidden peer" :checked="elem.status === 'Doing'">
+                  <label :for="listId.toString() + i.toString() + 2" class="text-lg font-semibold inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer  peer-checked:bg-green-600  peer-checked:text-white hover:text-gray-600 hover:bg-gray-100 ">
+                    Doing
+                  </label>
+                </li>
+                <li>
+                  <input @click="changeStatus(listId, i, 'Done', elem)" type="radio" :id="listId.toString() + i.toString() + 3" :name="listId.toString() + i.toString()" value="Done" class="hidden peer" :checked="elem.status === 'Done'">
+                  <label :for="listId.toString() + i.toString() + 3" class="text-lg font-semibold inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer  peer-checked:bg-green-600  peer-checked:text-white hover:text-gray-600 hover:bg-gray-100 ">
+                    Done
+                  </label>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -30,21 +48,28 @@
 
 <script>
 import ToDoListElemMenu from '@/components/ToDoListElemMenu.vue'
-import ToDoListElemStatus from '@/components/ToDoListElemStatus.vue'
 import ElementDataService from '@/services/ElementDataService'
 
 export default {
   components: {
-    ToDoListElemMenu,
-    ToDoListElemStatus
+    ToDoListElemMenu
   },
-  props: ['list', 'listId', 'addElement', 'removeElement'],
+  props: ['list', 'listId', 'addElement', 'removeElement', 'updateElement'],
   methods: {
     deleteElement (listId, index, id) {
-      console.log('clicked delete ' + id)
       ElementDataService.delete(id)
         .then(response => {
           this.removeElement(listId, index)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    changeStatus (listId, index, status, elem) {
+      elem.status = status
+      ElementDataService.update(elem.id, elem)
+        .then(response => {
+          this.updateElement(listId, index, status)
         })
         .catch(error => {
           console.log(error)

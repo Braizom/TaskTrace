@@ -40,6 +40,9 @@ export default {
   },
   methods: {
     newTheme (toggleThemeCreation) {
+      if (this.theme.name === '') {
+        return
+      }
       this.theme.userId = this.user.id
       ThemeDataService.create(this.user.id, this.theme)
         .then((response) => {

@@ -25,7 +25,7 @@
               </svg>
             </button>
           </summary>
-          <ToDoListElem :list="list" :listId="i" :addElement="addElement" :removeElement="removeElement"/>
+          <ToDoListElem :list="list" :listId="i" :addElement="addElement" :removeElement="removeElement" :updateElement="updateElement"/>
         </details>
       </li>
     </ul>
@@ -80,6 +80,9 @@ export default {
     },
     removeElement (listId, index) {
       this.theme.lists[listId].elems.splice(index, 1)
+    },
+    updateElement (listId, index, newStatus) {
+      this.theme.lists[listId].elems[index].status = newStatus
     }
   }
 }
