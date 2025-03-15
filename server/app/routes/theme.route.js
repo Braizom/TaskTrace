@@ -1,4 +1,3 @@
-const user = require("../controllers/user.controller");
 module.exports = app => {
     const theme = require('../controllers/theme.controller.js')
     const router = require('express').Router()

@@ -78,7 +78,6 @@ export default {
       this.connected = status
     },
     addTheme (theme, toggleThemeCreation) {
-      console.log('create theme ', theme)
       this.themes.unshift(theme)
       toggleThemeCreation()
     },
