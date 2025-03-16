@@ -1,6 +1,6 @@
 <template>
   <div class="my-10">
-    <SettingsParameters :user = "user" @update-user="$emit('update-user', $event)"/>
+    <SettingsParameters :user = "user" @update-user="$emit('update-user', $event)" :toggleStyle="toggleStyle"/>
   </div>
 
 </template>
@@ -9,7 +9,7 @@
 import SettingsParameters from '@/components/SettingsParameters.vue'
 
 export default {
-  props: ['user'],
+  props: ['user', 'toggleStyle'],
   components: {
     SettingsParameters
   }

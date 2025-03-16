@@ -1,7 +1,11 @@
 <template>
-  <MainHeader :connected="connected" @update-connected="updateConnected"  :user = "user" @update-user="updateUser"/>
-  <router-view :connected="connected" @update-connected="updateConnected" :user = "user" @update-user="updateUser" :themes="themes" :addTheme="addTheme" :removeTheme="removeTheme"/>
-  <MainFooter/>
+  <div :class="style">
+    <div class="bg-white dark:bg-gray-900 flex flex-col min-h-screen">
+      <MainHeader :connected="connected" @update-connected="updateConnected"  :user = "user" @update-user="updateUser"/>
+      <router-view class="mb-20" :connected="connected" @update-connected="updateConnected" :user = "user" @update-user="updateUser" :themes="themes" :addTheme="addTheme" :removeTheme="removeTheme" :toggleStyle="toggleStyle"/>
+      <MainFooter/>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -63,7 +67,8 @@ export default {
     return {
       user: {},
       connected: false,
-      themes: []
+      themes: [],
+      style: ''
     }
   },
   methods: {
@@ -88,6 +93,9 @@ export default {
     },
     removeTheme (index) {
       this.themes.splice(index, 1)
+    },
+    toggleStyle (style) {
+      this.style = style
     }
   }
 }

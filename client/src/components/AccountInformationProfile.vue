@@ -9,32 +9,24 @@ onMounted(() => {
 
 <template>
     <div>
-        <h1 class="text-2xl font-bold text-ttHeaderText sm:text-center">Account Information</h1>
+        <h1 class="text-2xl font-bold text-ttHeaderText sm:text-center dark:text-white">Account Information</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto p-6">
             <div class="flex items-center space-x-4 p-4 w-full">
-                <span class="text-lg bg-gray-200 p-2 rounded-full">ℹ️</span>
+                <span class="text-lg bg-gray-200 p-2 rounded-full dark:bg-gray-600">ℹ️</span>
                 <div class="w-full">
-                    <h3 class="font-semibold">Registration date</h3>
+                    <h3 class="font-semibold dark:text-white">Registration date</h3>
                     <p class="text-gray-500 text-sm md:text-base w-full">Member since {{ user.createdAt ? user.createdAt.split('T')[0] : 'N/A' }}</p>
                 </div>
             </div>
             <div class="flex items-center space-x-4 p-4 w-full">
-                <span class="text-lg bg-gray-200 p-2 rounded-full">ℹ️</span>
+                <span class="text-lg bg-gray-200 p-2 rounded-full dark:bg-gray-600">ℹ️</span>
                 <div class="w-full">
-                    <h3 class="font-semibold">Email</h3>
+                    <h3 class="font-semibold dark:text-white">Email</h3>
                     <p class="text-gray-500 text-sm md:text-base w-full">{{ user.email }}</p>
                 </div>
             </div>
             <div class="flex items-center space-x-4 p-4 w-full">
-                <span class="text-lg bg-gray-200 p-2 rounded-full">ℹ️</span>
-                <div class="w-full">
-                    <h3 class="font-semibold">Statistics</h3>
-                    <p class="text-gray-500 text-sm md:text-base w-full">Track the number of To-Do Lists you’ve created.</p>
-                    <button class="mt-2 bg-black text-white px-3 py-1 rounded">Click here</button>
-                </div>
-            </div>
-            <div class="flex items-center space-x-4 p-4 w-full">
-                <span class="text-lg bg-gray-200 p-2 rounded-full">ℹ️</span>
+                <span class="text-lg bg-gray-200 p-2 rounded-full dark:bg-gray-600">ℹ️</span>
                 <div class="w-full">
                     <h3 class="font-semibold text-red-500">Delete all your Data</h3>
                     <p class="text-gray-500 text-sm md:text-base w-full">This will permanently delete all your themes and To-Do Lists.</p>
