@@ -16,5 +16,9 @@ class ThemeDataService {
   delete (id) {
     return http.delete(`/theme/delete/${id}`)
   }
+
+  deleteAll (id) {
+    return http.delete(`/theme/deleteAll/${id}`)
+  }
 }
 export default new ThemeDataService()

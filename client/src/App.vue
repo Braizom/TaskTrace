@@ -2,7 +2,7 @@
   <div :class="style">
     <div class="bg-white dark:bg-gray-900 flex flex-col min-h-screen">
       <MainHeader :connected="connected" @update-connected="updateConnected"  :user = "user" @update-user="updateUser"/>
-      <router-view class="mb-20" :connected="connected" @update-connected="updateConnected" :user = "user" @update-user="updateUser" :themes="themes" :addTheme="addTheme" :removeTheme="removeTheme" :toggleStyle="toggleStyle"/>
+      <router-view class="mb-20" :connected="connected" @update-connected="updateConnected" :user = "user" @update-user="updateUser" :themes="themes" :addTheme="addTheme" :removeTheme="removeTheme" :toggleStyle="toggleStyle" :wipeData="wipeData"/>
       <MainFooter/>
     </div>
   </div>
@@ -96,6 +96,9 @@ export default {
     },
     removeTheme (index) {
       this.themes.splice(index, 1)
+    },
+    wipeData () {
+      this.themes.splice(0, this.themes.length)
     },
     toggleStyle (style) {
       this.style = style
