@@ -53,7 +53,7 @@ export default {
       UserDataService.updateUser(this.user.id, this.user)
         .then(response => {
           console.log('User updated successfully:', response.data)
-          this.showContents(response.data.id)
+          this.showContents(response.data.user.id)
         })
         .catch(error => {
           console.error('Error updating user:', error)
@@ -64,6 +64,7 @@ export default {
       this.connected = status
     },
     showContents (id) {
+      console.log('USER:' + id)
       ThemeDataService.findAll(id)
         .then(data => {
           this.themes = data.data
