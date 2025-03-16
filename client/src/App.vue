@@ -29,35 +29,7 @@ export default {
         this.connected = true
         console.log('this.data dans App.vue : ', this.user)
         console.log(response.data)
-        ThemeDataService.findAll(this.user.id)
-          .then(data => {
-            this.themes = data.data
-            this.themes.forEach(theme => {
-              ListDataService.findAll(theme.id)
-                .then(data => {
-                  theme.lists = data.data
-                  theme.lists.forEach(list => {
-                    ElementDataService.findAll(list.id)
-                      .then(data => {
-                        list.elems = data.data
-                        list.elems = list.elems.reverse()
-                      })
-                      .catch(error => {
-                        console.log(error)
-                      })
-                  })
-                  theme.lists = theme.lists.reverse()
-                })
-                .catch(error => {
-                  console.log(error)
-                })
-            })
-            this.themes = this.themes.reverse()
-            console.log(this.themes)
-          })
-          .catch(error => {
-            console.log(error)
-          })
+        this.showContents(response.data.id)
       })
       .catch(() => {
         console.log('User non authenticated')
@@ -81,6 +53,7 @@ export default {
       UserDataService.updateUser(this.user.id, this.user)
         .then(response => {
           console.log('User updated successfully:', response.data)
+          this.showContents(response.data.id)
         })
         .catch(error => {
           console.error('Error updating user:', error)
@@ -89,6 +62,37 @@ export default {
     updateConnected (status) {
       console.log('update of "connected" :', status)
       this.connected = status
+    },
+    showContents (id) {
+      ThemeDataService.findAll(id)
+        .then(data => {
+          this.themes = data.data
+          this.themes.forEach(theme => {
+            ListDataService.findAll(theme.id)
+              .then(data => {
+                theme.lists = data.data
+                theme.lists.forEach(list => {
+                  ElementDataService.findAll(list.id)
+                    .then(data => {
+                      list.elems = data.data
+                      list.elems = list.elems.reverse()
+                    })
+                    .catch(error => {
+                      console.log(error)
+                    })
+                })
+                theme.lists = theme.lists.reverse()
+              })
+              .catch(error => {
+                console.log(error)
+              })
+          })
+          this.themes = this.themes.reverse()
+          console.log(this.themes)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     addTheme (theme, toggleThemeCreation) {
       this.themes.unshift(theme)
