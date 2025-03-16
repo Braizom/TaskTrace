@@ -40,16 +40,19 @@ export default {
                     ElementDataService.findAll(list.id)
                       .then(data => {
                         list.elems = data.data
+                        list.elems = list.elems.reverse()
                       })
                       .catch(error => {
                         console.log(error)
                       })
                   })
+                  theme.lists = theme.lists.reverse()
                 })
                 .catch(error => {
                   console.log(error)
                 })
             })
+            this.themes = this.themes.reverse()
             console.log(this.themes)
           })
           .catch(error => {
