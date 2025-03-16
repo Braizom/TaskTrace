@@ -70,3 +70,26 @@ exports.delete = (req, res) => {
             })
         })
 }
+
+exports.deleteAll = (req, res) => {
+    const id = req.params.id
+
+    Theme.destroy({ where: { userId: id } })
+        .then(data => {
+            if (data === 1) {
+                res.send({
+                    message: 'All contents deleted successfully'
+                })
+            }
+            else{
+                res.send({
+                    message: 'Nothing to delete'
+                })
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: 'Could not delete contents'
+            })
+        })
+}

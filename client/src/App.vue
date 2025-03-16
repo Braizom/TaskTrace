@@ -2,7 +2,7 @@
   <div :class="style">
     <div class="bg-white dark:bg-gray-900 flex flex-col min-h-screen">
       <MainHeader :connected="connected" @update-connected="updateConnected"  :user = "user" @update-user="updateUser"/>
-      <router-view class="mb-20" :connected="connected" @update-connected="updateConnected" :user = "user" @update-user="updateUser" :themes="themes" :addTheme="addTheme" :removeTheme="removeTheme" :toggleStyle="toggleStyle"/>
+      <router-view class="mb-20" :connected="connected" @update-connected="updateConnected" :user = "user" @update-user="updateUser" :themes="themes" :addTheme="addTheme" :removeTheme="removeTheme" :toggleStyle="toggleStyle" :wipeData="wipeData"/>
       <MainFooter/>
     </div>
   </div>
@@ -29,32 +29,7 @@ export default {
         this.connected = true
         console.log('this.data dans App.vue : ', this.user)
         console.log(response.data)
-        ThemeDataService.findAll(this.user.id)
-          .then(data => {
-            this.themes = data.data
-            this.themes.forEach(theme => {
-              ListDataService.findAll(theme.id)
-                .then(data => {
-                  theme.lists = data.data
-                  theme.lists.forEach(list => {
-                    ElementDataService.findAll(list.id)
-                      .then(data => {
-                        list.elems = data.data
-                      })
-                      .catch(error => {
-                        console.log(error)
-                      })
-                  })
-                })
-                .catch(error => {
-                  console.log(error)
-                })
-            })
-            console.log(this.themes)
-          })
-          .catch(error => {
-            console.log(error)
-          })
+        this.showContents(response.data.id)
       })
       .catch(() => {
         console.log('User non authenticated')
@@ -78,6 +53,7 @@ export default {
       UserDataService.updateUser(this.user.id, this.user)
         .then(response => {
           console.log('User updated successfully:', response.data)
+          this.showContents(response.data.user.id)
         })
         .catch(error => {
           console.error('Error updating user:', error)
@@ -87,12 +63,47 @@ export default {
       console.log('update of "connected" :', status)
       this.connected = status
     },
+    showContents (id) {
+      console.log('USER:' + id)
+      ThemeDataService.findAll(id)
+        .then(data => {
+          this.themes = data.data
+          this.themes.forEach(theme => {
+            ListDataService.findAll(theme.id)
+              .then(data => {
+                theme.lists = data.data
+                theme.lists.forEach(list => {
+                  ElementDataService.findAll(list.id)
+                    .then(data => {
+                      list.elems = data.data
+                      list.elems = list.elems.reverse()
+                    })
+                    .catch(error => {
+                      console.log(error)
+                    })
+                })
+                theme.lists = theme.lists.reverse()
+              })
+              .catch(error => {
+                console.log(error)
+              })
+          })
+          this.themes = this.themes.reverse()
+          console.log(this.themes)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
     addTheme (theme, toggleThemeCreation) {
       this.themes.unshift(theme)
       toggleThemeCreation()
     },
     removeTheme (index) {
       this.themes.splice(index, 1)
+    },
+    wipeData () {
+      this.themes.splice(0, this.themes.length)
     },
     toggleStyle (style) {
       this.style = style

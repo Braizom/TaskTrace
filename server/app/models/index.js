@@ -15,13 +15,19 @@ db.themes = require('./theme.model.js')(connex, Sequelize)
 db.lists = require('./list.model.js')(connex, Sequelize)
 db.elements = require('./element.model.js')(connex, Sequelize)
 
-db.users.hasMany(db.themes)
+db.users.hasMany(db.themes, {
+    onDelete: 'CASCADE'
+})
 db.themes.belongsTo(db.users)
 
-db.themes.hasMany(db.lists)
+db.themes.hasMany(db.lists, {
+    onDelete: 'CASCADE'
+})
 db.lists.belongsTo(db.themes)
 
-db.lists.hasMany(db.elements)
+db.lists.hasMany(db.elements, {
+    onDelete: 'CASCADE'
+})
 db.elements.belongsTo(db.lists)
 
 module.exports = db
