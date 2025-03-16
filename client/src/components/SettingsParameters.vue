@@ -8,53 +8,14 @@ onMounted(() => {
 })
 </script>
 
-<script>
-export default {
-  props: ['user'],
-  data () {
-    return {
-      passwords: { actualPassword: '', newPassword: '', confirmPassword: '' }
-    }
-  },
-  methods: {
-    async deleteAccount () {
-      try {
-        console.log('dans la fonction deleteAccount, voici this.user : ', this.user)
-        const response = await UserDataService.deleteUser(this.user.id)
-        console.log(response)
-        this.$emit('update-user', {})
-        alert('Account deleted successfully.')
-        this.$router.push('/')
-      } catch (error) {
-        console.error('Error deleting account:', error)
-        alert('An error occurred while deleting the account.')
-      }
-    },
-    changePassword () {
-      UserDataService.changePassword(this.user.id, this.passwords)
-        .then(response => {
-          console.log('Password changed successfully:', response.data)
-          alert('Password updated successfully.')
-        })
-        .catch(error => {
-          console.error('Error changing password:', error.response.data.message)
-          alert(error.response.data.message)
-          // alert('An error occurred while updating the password.')
-        })
-      console.log('actual password : ', this.passwords.actualPassword)
-      console.log('new password : ', this.passwords.newPassword)
-    }
-  }
-}
-</script>
 <template>
     <div>
-        <h1 class="text-2xl font-bold text-ttHeaderText sm:text-center">Settings</h1>
+        <h1 class="text-2xl font-bold text-ttHeaderText sm:text-center dark:text-white">Settings</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto p-6">
             <div class="flex items-center space-x-4 p-4 w-full">
-                <span class="text-lg bg-gray-200 p-2 rounded-full">ℹ️</span>
+                <span class="text-lg bg-gray-200 p-2 rounded-full dark:bg-gray-600">ℹ️</span>
                 <div class="w-full">
-                    <h3 class="font-semibold">Change Password</h3>
+                    <h3 class="font-semibold dark:text-white">Change Password</h3>
                     <p class="text-gray-500 text-sm md:text-base w-full">Change your password</p>
                   <!-- Modal toggle -->
                   <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
@@ -62,7 +23,7 @@ export default {
                   </button>
 
                   <!-- Main modal -->
-                  <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                  <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-gray-600 bg-opacity-75">
                     <div class="relative p-4 w-full max-w-md max-h-full">
                       <!-- Modal content -->
                       <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
@@ -103,26 +64,26 @@ export default {
                 </div>
             </div>
             <div class="flex items-center space-x-4 p-4 w-full">
-                <span class="text-lg bg-gray-200 p-2 rounded-full">ℹ️</span>
+                <span class="text-lg bg-gray-200 p-2 rounded-full dark:bg-gray-600">ℹ️</span>
                 <div class="w-full">
-                    <h3 class="font-semibold">Appearance</h3>
+                    <h3 class="font-semibold dark:text-white">Appearance</h3>
                     <p class="text-gray-500 text-sm md:text-base w-full">Switch between dark and light mode for a comfortable viewing experience.</p>
                     <div class="inline-flex rounded-md shadow-xs">
-                    <button type="button" class="px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-s-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white ">
+                    <button @click="toggleStyle('')" type="button" class="px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-s-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:text-white dark:border-white dark:hover:bg-white dark:hover:text-gray-900">
                         Light theme
                     </button>
-                    <button type="button" class="px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-e-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white ">
+                    <button @click="toggleStyle('dark')" type="button" class="px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-e-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:text-white dark:border-white dark:hover:bg-white dark:hover:text-gray-900">
                         Dark theme
                     </button>
                     </div>
                 </div>
             </div>
             <div class="flex items-center space-x-4 p-4 w-full">
-                <span class="text-lg bg-gray-200 p-2 rounded-full">ℹ️</span>
+                <span class="text-lg bg-gray-200 p-2 rounded-full dark:bg-gray-600">ℹ️</span>
                 <div class="w-full">
                     <h3 class="font-semibold text-red-500">Delete Account</h3>
                     <p class="text-gray-500 text-sm md:text-base w-full">Permanently delete your account and all associated data. This action cannot be undone.</p>
-                    <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="w-1/2 bg-red-500 text-white py-2 rounded-lg hover:bg-gray-800 my-2">Delete Account</button>
+                    <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="w-1/2 bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 my-2">Delete Account</button>
                     <div id="popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-gray-600 bg-opacity-75">
                         <div class="relative p-4 w-full max-w-md max-h-full">
                             <div class="relative bg-white rounded-lg shadow-sm">
@@ -150,3 +111,43 @@ export default {
         </div>
     </div>
 </template>
+
+<script>
+export default {
+  props: ['user', 'toggleStyle'],
+  data () {
+    return {
+      passwords: { actualPassword: '', newPassword: '', confirmPassword: '' }
+    }
+  },
+  methods: {
+    async deleteAccount () {
+      try {
+        console.log('dans la fonction deleteAccount, voici this.user : ', this.user)
+        const response = await UserDataService.deleteUser(this.user.id)
+        console.log(response)
+        this.$emit('update-user', {})
+        alert('Account deleted successfully.')
+        this.$router.push('/')
+      } catch (error) {
+        console.error('Error deleting account:', error)
+        alert('An error occurred while deleting the account.')
+      }
+    },
+    changePassword () {
+      UserDataService.changePassword(this.user.id, this.passwords)
+        .then(response => {
+          console.log('Password changed successfully:', response.data)
+          alert('Password updated successfully.')
+        })
+        .catch(error => {
+          console.error('Error changing password:', error.response.data.message)
+          alert(error.response.data.message)
+          // alert('An error occurred while updating the password.')
+        })
+      console.log('actual password : ', this.passwords.actualPassword)
+      console.log('new password : ', this.passwords.newPassword)
+    }
+  }
+}
+</script>
