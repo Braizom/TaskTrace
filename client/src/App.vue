@@ -2,7 +2,7 @@
   <div :class="style">
     <div class="bg-white dark:bg-gray-900 flex flex-col min-h-screen">
       <MainHeader :connected="connected" @update-connected="updateConnected"  :user = "user" @update-user="updateUser" :setStyle="setStyle"/>
-      <router-view class="mb-20" :connected="connected" @update-connected="updateConnected" :user = "user" @update-user="updateUser" :themes="themes" :addTheme="addTheme" :removeTheme="removeTheme" :toggleStyle="toggleStyle" :wipeData="wipeData"/>
+      <router-view class="mb-20" :connected="connected" @update-connected="updateConnected" :user = "user" @update-user="updateUser" :themes="themes" :addTheme="addTheme" :removeTheme="removeTheme" :toggleStyle="toggleStyle" :wipeData="wipeData" :setStyle="setStyle"/>
       <MainFooter/>
     </div>
   </div>

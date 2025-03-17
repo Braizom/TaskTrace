@@ -114,7 +114,7 @@ onMounted(() => {
 
 <script>
 export default {
-  props: ['user', 'toggleStyle'],
+  props: ['user', 'toggleStyle', 'setStyle'],
   data () {
     return {
       passwords: { actualPassword: '', newPassword: '', confirmPassword: '' }
@@ -129,6 +129,7 @@ export default {
         this.$emit('update-user', {})
         alert('Account deleted successfully.')
         this.$router.push('/')
+        this.setStyle('')
       } catch (error) {
         console.error('Error deleting account:', error)
         alert('An error occurred while deleting the account.')
