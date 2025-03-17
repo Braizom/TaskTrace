@@ -36,7 +36,7 @@
 <script>
 import UserDataService from '@/services/UserDataService'
 export default {
-  props: ['user'],
+  props: ['user', 'setStyle'],
   methods: {
     logout () {
       console.log('juste avant de deco', this.user)
@@ -48,6 +48,7 @@ export default {
           this.$router.push('/')
           this.$emit('update-user', {})
           this.$emit('update-connected', false)
+          this.setStyle('')
         })
         .catch(error => {
           console.log(error, 'lors de la deconnexion')

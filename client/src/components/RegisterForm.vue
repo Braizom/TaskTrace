@@ -72,7 +72,8 @@ export default {
         email: '',
         password: '',
         biography: '',
-        token: ''
+        token: '',
+        theme: ''
       }
     }
   },
