@@ -103,7 +103,7 @@ export default {
       this.themes.splice(index, 1)
     },
     wipeData () {
-      this.themes.splice(0, this.themes.length)
+      this.showContents(this.user.id)
     },
     toggleStyle (style) {
       this.style = style

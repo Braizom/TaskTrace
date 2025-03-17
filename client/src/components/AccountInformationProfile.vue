@@ -10,6 +10,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <div>
     <div>
         <h1 class="text-2xl font-bold text-ttHeaderText sm:text-center dark:text-white">Account Information</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto p-6">
@@ -61,14 +62,16 @@ onMounted(() => {
             </div>
         </div>
     </div>
+  </div>
 </template>
 
 <script>
 export default {
   props: {
-    user: Object
+    user: Object,
+    wipeData: Function
   },
-  emits: ['updateUser', 'wipeData'],
+  emits: ['updateUser'],
   methods: {
     wipeAccount () {
       ThemeDataService.deleteAll(this.user.id)
