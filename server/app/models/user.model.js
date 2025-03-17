@@ -41,6 +41,9 @@ module.exports = (connex, Sequelize) => {
         },
         token: {
             type: Sequelize.STRING
+        },
+        theme: {
+            type: Sequelize.STRING
         }
     });
     return User;

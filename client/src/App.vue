@@ -1,8 +1,8 @@
 <template>
   <div :class="style">
     <div class="bg-white dark:bg-gray-900 flex flex-col min-h-screen">
-      <MainHeader :connected="connected" @update-connected="updateConnected"  :user = "user" @update-user="updateUser"/>
-      <router-view class="mb-20" :connected="connected" @update-connected="updateConnected" :user = "user" @update-user="updateUser" :themes="themes" :addTheme="addTheme" :removeTheme="removeTheme" :toggleStyle="toggleStyle" :wipeData="wipeData"/>
+      <MainHeader :connected="connected" @update-connected="updateConnected"  :user = "user" @update-user="updateUser" :setStyle="setStyle"/>
+      <router-view class="mb-20" :connected="connected" @update-connected="updateConnected" :user = "user" @update-user="updateUser" :themes="themes" :addTheme="addTheme" :removeTheme="removeTheme" :toggleStyle="toggleStyle" :wipeData="wipeData" :setStyle="setStyle"/>
       <MainFooter/>
     </div>
   </div>
@@ -30,6 +30,9 @@ export default {
         console.log('this.data dans App.vue : ', this.user)
         console.log(response.data)
         this.showContents(response.data.id)
+        this.style = response.data.theme
+        this.toggleStyle(this.style)
+        console.log('dans le mounted : ', this.style)
       })
       .catch(() => {
         console.log('User non authenticated')
@@ -54,6 +57,7 @@ export default {
         .then(response => {
           console.log('User updated successfully:', response.data)
           this.showContents(response.data.user.id)
+          this.style = response.data.user.theme
         })
         .catch(error => {
           console.error('Error updating user:', error)
@@ -106,6 +110,12 @@ export default {
       this.showContents(this.user.id)
     },
     toggleStyle (style) {
+      this.style = style
+      this.user.theme = style
+      console.log(this.style, this.user, this.user.id)
+      this.updateUser(this.user)
+    },
+    setStyle (style) {
       this.style = style
     }
   }
