@@ -138,16 +138,13 @@ export default {
     changePassword () {
       UserDataService.changePassword(this.user.id, this.passwords)
         .then(response => {
-          console.log('Password changed successfully:', response.data)
+          console.log(response)
           alert('Password updated successfully.')
         })
         .catch(error => {
           console.error('Error changing password:', error.response.data.message)
           alert(error.response.data.message)
-          // alert('An error occurred while updating the password.')
         })
-      console.log('actual password : ', this.passwords.actualPassword)
-      console.log('new password : ', this.passwords.newPassword)
     }
   }
 }
