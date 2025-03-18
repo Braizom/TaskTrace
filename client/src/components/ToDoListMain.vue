@@ -1,5 +1,5 @@
 <template>
-  <div class="m-5">
+  <div v-if="this.theme && this.theme.lists" class="m-5">
     <h1 class="text-3xl font-semibold dark:text-white">{{ theme.name }}</h1>
     <p class="m-4 dark:text-gray-300">You have {{ (theme.lists).length }} "{{ theme.name }}" to-do lists.</p>
     <div class="w-full md:block md:w-auto">

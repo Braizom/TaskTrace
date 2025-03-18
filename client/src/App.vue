@@ -15,7 +15,6 @@ import UserDataService from '@/services/UserDataService'
 import ThemeDataService from '@/services/ThemeDataService'
 import ListDataService from '@/services/ListDataService'
 import ElementDataService from '@/services/ElementDataService'
-// import { mapGetters } from 'vuex'
 export default {
   components: {
     MainHeader,
@@ -24,18 +23,13 @@ export default {
   mounted () {
     UserDataService.auth()
       .then(response => {
-        console.log('User authentic :', response.data)
         this.user = response.data
         this.connected = true
-        console.log('this.data dans App.vue : ', this.user)
-        console.log(response.data)
         this.showContents(response.data.id)
         this.style = response.data.theme
         this.toggleStyle(this.style)
-        console.log('dans le mounted : ', this.style)
       })
       .catch(() => {
-        console.log('User non authenticated')
         this.connected = false
         this.user = {}
         this.$router.push('/')
@@ -51,11 +45,9 @@ export default {
   },
   methods: {
     updateUser (updatedUser) {
-      console.log('dans updateUser : ', updatedUser)
       this.user = updatedUser.user ? updatedUser.user : updatedUser
       UserDataService.updateUser(this.user.id, this.user)
         .then(response => {
-          console.log('User updated successfully:', response.data)
           this.showContents(response.data.user.id)
           this.style = response.data.user.theme
         })
@@ -64,11 +56,9 @@ export default {
         })
     },
     updateConnected (status) {
-      console.log('update of "connected" :', status)
       this.connected = status
     },
     showContents (id) {
-      console.log('USER:' + id)
       ThemeDataService.findAll(id)
         .then(data => {
           this.themes = data.data
@@ -93,7 +83,6 @@ export default {
               })
           })
           this.themes = this.themes.reverse()
-          console.log(this.themes)
         })
         .catch(error => {
           console.log(error)
@@ -112,7 +101,6 @@ export default {
     toggleStyle (style) {
       this.style = style
       this.user.theme = style
-      console.log(this.style, this.user, this.user.id)
       this.updateUser(this.user)
     },
     setStyle (style) {

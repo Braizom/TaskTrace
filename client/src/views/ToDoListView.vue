@@ -1,11 +1,11 @@
 <template>
   <div class="mx-44">
-    <ToDoListMain :theme="theme" :toggleListCreation="toggleListCreation"/>
+    <ToDoListMain :theme="resTheme" :toggleListCreation="toggleListCreation"/>
     <ul class="mt-5 mb-5 divide-y rounded-xl">
       <li v-if="listCreation">
-        <CreateList :toggleListCreation="toggleListCreation" :addList="addList" :themeId="theme.id"/>
+        <CreateList :toggleListCreation="toggleListCreation" :addList="addList" :themeId="resTheme.id"/>
       </li>
-      <li v-for="(list, i) in theme.lists" :key="i">
+      <li v-for="(list, i) in resTheme.lists" :key="i">
         <details class="group">
           <summary class="w-full flex justify-between gap-3 px-4 py-3 font-medium marker:content-none hover:cursor-pointer">
             <span class="flex text-xl items-center dark:text-white">
@@ -44,16 +44,21 @@ export default {
     ToDoListElem
   },
   props: ['themes'],
-  computed: {
-    theme () {
-      return this.themes.find((p) => {
-        return p.id === Number(this.$route.params.id)
+  mounted () {
+    if (this.themes && this.themes.length > 0) {
+      this.theme()
+    } else {
+      this.$watch('themes', (newVal) => {
+        if (newVal && newVal.length > 0) {
+          this.theme()
+        }
       })
     }
   },
   data () {
     return {
-      listCreation: false
+      listCreation: false,
+      resTheme: ''
     }
   },
   methods: {
@@ -61,27 +66,35 @@ export default {
       this.listCreation = !this.listCreation
     },
     addList (list) {
-      this.theme.lists.unshift(list)
+      this.resTheme.lists.unshift(list)
       this.listCreation = false
     },
     addElement (listId, element, toggleElementCreation) {
-      this.theme.lists[listId].elems.unshift(element)
+      this.resTheme.lists[listId].elems.unshift(element)
       toggleElementCreation()
     },
     removeList (index, listId) {
       ListDataService.delete(listId)
         .then((res) => {
-          this.theme.lists.splice(index, 1)
+          console.log(res)
+          this.resTheme.lists.splice(index, 1)
         })
         .catch((err) => {
           console.log(err)
         })
     },
     removeElement (listId, index) {
-      this.theme.lists[listId].elems.splice(index, 1)
+      this.resTheme.lists[listId].elems.splice(index, 1)
     },
     updateElement (listId, index, newStatus) {
-      this.theme.lists[listId].elems[index].status = newStatus
+      this.resTheme.lists[listId].elems[index].status = newStatus
+    },
+    theme () {
+      const res = this.themes.find((p) => {
+        return p.id === Number(this.$route.params.id)
+      })
+      this.resTheme = res
+      return res
     }
   }
 }
