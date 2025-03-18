@@ -39,7 +39,6 @@ export default {
   props: ['user', 'setStyle'],
   methods: {
     logout () {
-      console.log('juste avant de deco', this.user)
       UserDataService.logout()
         .then(response => {
           console.log(response)
@@ -51,7 +50,7 @@ export default {
           this.setStyle('')
         })
         .catch(error => {
-          console.log(error, 'lors de la deconnexion')
+          console.log(error)
         })
     }
   }

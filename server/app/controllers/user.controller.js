@@ -1,10 +1,7 @@
 const db = require('../models')
-// const userModel = require('../models/user.model')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const User = db.users
-//const OP = db.Sequelize.Op
-// const https = require('http')
 
 exports.findAll = (req, res) => {
     User.findAll()
@@ -19,12 +16,10 @@ exports.findAll = (req, res) => {
         })
 }
 exports.create = async (req, res) => {
-    console.log('informations recu dans le backend :',req.body)
     try {
         const { username, email} = req.body;
 
         const existingUserByUsername = await User.findOne({ where: { username: username }});
-        console.log(existingUserByUsername)
         if (existingUserByUsername) {
             return res.status(400).send({
                 message: "Username already taken"
@@ -32,7 +27,6 @@ exports.create = async (req, res) => {
         }
 
         const existingUserByEmail = await User.findOne({ where: { email: email }});
-        console.log(existingUserByEmail)
         if (existingUserByEmail) {
             return res.status(400).send({
                 message: "Email already in use"
@@ -72,17 +66,16 @@ exports.findByUsername = (req, res) => {
             res.send(user)
         })
         .catch(err => {
-            console.log(err)
             res.status(500).send({
                 message: 'Could not find the data'
             })
         })
 }
+
 exports.loginVerification = async (req, res) => {
     try {
         const {email} = req.body;
         const password1 = req.body.password;
-        console.log(req.body, "dans loginVerification")
 
         const user = await User.findOne({where: {email: email}})
         if (!user) {
@@ -140,7 +133,6 @@ exports.auth = async (req, res) => {
 
 exports.logout = async (req, res) => {
     try {
-        // Récupérer l'utilisateur à partir du token
         const cookie = req.cookies['jwt']
         if (!cookie) {
             return res.status(401).send({ message: 'Not authenticated' })
@@ -151,10 +143,8 @@ exports.logout = async (req, res) => {
             return res.status(401).send({ message: 'Invalid token' })
         }
 
-        // Trouver l'utilisateur et supprimer son token en base de données
         await User.update({ token: null }, { where: { id: claims.id } })
 
-        // Supprimer le cookie JWT
         res.cookie('jwt', '', { maxAge: 0 })
 
         res.status(200).send({ message: 'Logout successful' })
@@ -176,7 +166,6 @@ exports.deleteUser = async (req, res) => {
         }
         await User.update({ token: null }, { where: { id: claims.id } })
         res.cookie('jwt', '', { maxAge: 0 })
-        console.log(req.body,'ON EST BIEN DANS DELETEUSER DU BACKEND !!!')
         const { id } = req.params;
         const user = await User.findByPk(id)
         if (!user) {
@@ -210,7 +199,6 @@ exports.updateUser = async (req, res) => {
 
 exports.changePassword = async (req, res) => {
     try {
-        console.log("-------------------- dans changePassword backend ------------- : ",req.body)
         const { id } = req.params
         const { actualPassword, newPassword, confirmPassword } = req.body
         const user = await User.findByPk(id)
@@ -232,6 +220,3 @@ exports.changePassword = async (req, res) => {
         res.status(500).send({ message: "Could not update the password" });
     }
 };
-// exports.delete = (req, res) => {
-
-// }

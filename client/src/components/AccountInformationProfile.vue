@@ -3,7 +3,6 @@ import { onMounted } from 'vue'
 import { initFlowbite } from 'flowbite'
 import ThemeDataService from '@/services/ThemeDataService'
 
-// initialize components based on data attribute selectors
 onMounted(() => {
   initFlowbite()
 })

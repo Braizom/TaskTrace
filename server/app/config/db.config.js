@@ -1,4 +1,4 @@
-require('dotenv').config(); // fetch environnemnt variables
+require('dotenv').config();
 
 module.exports = {
     HOST: process.env.DB_HOST,
